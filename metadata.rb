@@ -1,0 +1,11 @@
+name 'buttercup-webdav-server'
+maintainer 'Marcus Talken'
+maintainer_email 'operationaldev.com'
+license 'MIT'
+description 'Installs/Configures buttercup-webdav-server'
+long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
+version '0.1.0'
+chef_version '>= 14.0'
+supports 'redhat'
+source_url 'https://bitbucket.nednet.co.za/projects/BIZDEVOPS/repos/buttercup-webdav-server/browse'
+issues_url 'https://bitbucket.nednet.co.za/projects/BIZDEVOPS/repos/buttercup-webdav-server/pull-requests'
