@@ -26,6 +26,11 @@
 
 include_recipe 'acme'
 
+node.override['acme']['contact'] = ['mailto:operationaldev@gmail.com']
+# Real certificates please...
+node.override['acme']['endpoint'] = 'https://acme-v01.api.letsencrypt.org'
+
+
 # Generate selfsigned certificate so nginx can start
 
 acme_selfsigned 'temp.automatron.co.za' do
