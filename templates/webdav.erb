@@ -2,6 +2,7 @@
 # below here instead.
 server {
   listen 80;
+  server_name bcpw-host.automatron.co.za;
   # always use SSL
   location / {
     if ($request_method = POST) {
@@ -14,6 +15,7 @@ server {
 }
 server {
   listen 443;
+  server_name bcpw-host.automatron.co.za;
   client_max_body_size 0;
   proxy_read_timeout 300;  # answer from server, 5 min
   proxy_send_timeout 300;  # chunks to server, 5 min
@@ -34,13 +36,13 @@ server {
 
   location / {
     root      /var/dav;
-    client_body_temp_path /var/dav/temp;
-    dav_methods     PUT DELETE MKCOL COPY MOVE;
-    dav_ext_methods   PROPFIND OPTIONS;
-    create_full_put_path  on;
-    dav_access    user:rw group:rw all:rw;
+#    client_body_temp_path /var/dav/temp;
+#    dav_methods     PUT DELETE MKCOL COPY MOVE;
+#    dav_ext_methods   PROPFIND OPTIONS;
+#    create_full_put_path  on;
+#    dav_access    user:rw group:rw all:rw;
     autoindex     on;
-    auth_basic "restricted";
-    auth_basic_user_file /etc/nginx/htpasswd;
+#    auth_basic "restricted";
+#    auth_basic_user_file /etc/nginx/htpasswd;
   }
 }
