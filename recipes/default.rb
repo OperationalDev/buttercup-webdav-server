@@ -23,3 +23,35 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
+
+include_recipe 'acme'
+
+# Generate selfsigned certificate so nginx can start
+
+acme_selfsigned 'temp.automatron.co.za' do
+  crt     '/etc/ssl/temp.automatron.co.za.crt'
+  key     '/etc/ssl/temp.automatron.co.za.key'
+end
+
+package 'nginx'
+
+package 'nginx-extras'
+
+package 'apache2-utils'
+
+template '/etc/nginx/sites-enabled/webdav' do
+  source 'webdav.erb'
+  notifies :restart, 'service[nginx]', :delayed
+end
+
+service 'nginx' do
+  action [ :enable, :start ]
+end
+
+acme_certificate 'bcpw-host.automatron.co.za' do
+  alt_names         ['bcpw.automatron.co.za']
+  crt               '/etc/ssl/bcpw-host.automatron.co.za.crt'
+  key               '/etc/ssl/bcpw-host.automatron.co.za.key'
+  wwwroot           '/var/webdav'
+  notifies          :reload, 'service[nginx]'
+end
